@@ -11,9 +11,11 @@ const { SubMenu } = Menu;
 
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false)
+  const [logoUrl, setLogoUrl] = useState(require('../static/img/logo_default.png'))
   const onCollapse = collapsed => {
-    console.log(collapsed);
+    console.log('折叠', collapsed);
     setCollapsed(collapsed)
+    collapsed ? setLogoUrl(require('../static/img/logo_mini.png')) : setLogoUrl(require('../static/img/logo_default.png'))
   };
 
   const handleClickArticle = e => {
@@ -29,7 +31,7 @@ function AdminIndex(props) {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo">
-          <img className="logo-img" src={require('../static/img/logo1.png')} alt="" />
+          <img className="logo-img" src={logoUrl} alt="" />
         </div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1">
