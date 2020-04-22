@@ -3,8 +3,10 @@
 ### 博客后台管理系统
 
 #### 功能完善：
-- [ ] 使用three.js美化登陆界面，效果参考iview首页粒子波纹效果
+- [x] 使用three.js美化登陆界面，效果参考iview首页粒子波纹效果
 - [ ] 登出功能
+- [ ] eslint + lint-staged + prettier
+- [ ] 封装axios
 - [ ] 未定
 
 
