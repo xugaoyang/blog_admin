@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { PieChartOutlined, UserOutlined, FileOutlined } from '@ant-design/icons';
-import '../static/css/AdminIndex.css'
+import '../assets/css/adminIndex.scss'
 import AddArticle from './AddArticle'
 import ArticleList from './ArticleList'
 import {Route} from 'react-router-dom'
@@ -11,11 +11,11 @@ const { SubMenu } = Menu;
 
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false)
-  const [logoUrl, setLogoUrl] = useState(require('../static/img/logo_default.png'))
+  const [logoUrl, setLogoUrl] = useState(require('../assets/img/logo_default.png'))
   const onCollapse = collapsed => {
     console.log('折叠', collapsed);
     setCollapsed(collapsed)
-    collapsed ? setLogoUrl(require('../static/img/logo_mini.png')) : setLogoUrl(require('../static/img/logo_default.png'))
+    collapsed ? setLogoUrl(require('../assets/img/logo_mini.png')) : setLogoUrl(require('../assets/img/logo_default.png'))
   };
 
   const handleClickArticle = e => {
