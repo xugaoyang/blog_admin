@@ -7,7 +7,9 @@
 - [ ] 登出功能
 - [ ] eslint + lint-staged + prettier
 - [ ] 封装axios
-- [ ] 未定
+- [ ] 个人中心
+- [ ] 路由标签 react-router
+- [ ] 购物车界面掌握redux
 
 
 

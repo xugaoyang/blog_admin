@@ -61,7 +61,7 @@ function init() {
   var material = new THREE.ShaderMaterial( {
 
     uniforms: {
-      color: { value: new THREE.Color( 0x85efbe ) },
+      color: { value: new THREE.Color( 0xc87be4 ) },
     },
     vertexShader: document.getElementById( 'vertexshader' ).textContent,
     fragmentShader: document.getElementById( 'fragmentshader' ).textContent
@@ -149,11 +149,11 @@ function animate() {
 
 }
 function render() {
-
   camera.position.x += ( mouseX - camera.position.x ) * .05;
   // camera.position.y += ( - mouseY - camera.position.y ) * .05;
-  camera.position.y = 400; // y轴方向不改变粒子动画
-  camera.lookAt( scene.position );
+  camera.position.y = 300; // y轴方向不改变粒子动画
+  // camera.lookAt(scene.positon) // scene.position的默认是new THREE.Vector3(0,0,0)
+  camera.lookAt(0, 500, 0);
 
   var positions = particles.geometry.attributes.position.array;
   var scales = particles.geometry.attributes.scale.array;
@@ -182,7 +182,7 @@ function render() {
 
   renderer.render( scene, camera );
 
-  count += 0.1;
+  count += 0.02;
 
 }
 function Login(props) {
