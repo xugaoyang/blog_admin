@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
-import { ProfileOutlined, FileAddOutlined } from '@ant-design/icons';
+import { ProfileOutlined, FileAddOutlined, LogoutOutlined } from '@ant-design/icons';
 import '../assets/css/adminIndex.scss'
 import AddArticle from './AddArticle'
 import ArticleList from './ArticleList'
 import {Route} from 'react-router-dom'
+import { connect } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
+function mapStateToProps(state) {
+  return {
+    username: state.username
+  };
+}
 
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false)
@@ -45,7 +52,12 @@ function AdminIndex(props) {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}></Header>
+        <Header className="display-flex-end" style={{ background: '#fff', padding: 0 }}>
+          <div className="user-set">
+            <span className="m-r-10">{props.username}</span>
+            <LogoutOutlined className="m-r-20 cursor-pointer" />
+          </div>
+        </Header>
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>后台管理</Breadcrumb.Item>
@@ -67,4 +79,5 @@ function AdminIndex(props) {
   
 }
 
-export default AdminIndex
+// export default AdminIndex
+export default connect(mapStateToProps)(AdminIndex)

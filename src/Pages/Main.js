@@ -7,9 +7,8 @@ import Test from './Test'
 function Main() {
   return (
     <Router>
-      <Route path="/login/" exact component={Login} />
+      <Route path="/login" exact component={Login} />
       <Route path="/index/" component={AdminIndex} />
-      <Route path="/test/" component={Test} />
     </Router>
   )
 }

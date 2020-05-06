@@ -9,7 +9,7 @@
 - [ ] 封装axios
 - [ ] 个人中心
 - [ ] 路由标签 react-router
-- [ ] 购物车界面掌握redux
+- [ ] redux(添加redux-persist永久存储，解决刷新重置数据)
 
 
 

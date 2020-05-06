@@ -13,3 +13,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.display-flex-end{
+  display: flex;
+  justify-content: flex-end;
+}
+
+$ft-size: 5;
+@while $ft-size <= 30 {
+  .m-#{$ft-size} {
+    margin: 1px * $ft-size !important;
+  }
+  .m-t-#{$ft-size} {
+    margin-top: 1px * $ft-size !important;
+  }
+  .m-r-#{$ft-size} {
+    margin-right: 1px * $ft-size !important;
+  }
+  .m-b-#{$ft-size} {
+    margin-bottom: 1px * $ft-size !important;
+  }
+  .m-l-#{$ft-size} {
+    margin-left: 1px * $ft-size !important;
+  }
+  .p-#{$ft-size} {
+    padding: 1px * $ft-size !important;
+  }
+  .p-t-#{$ft-size} {
+    padding-top: 1px * $ft-size !important;
+  }
+  .p-r-#{$ft-size} {
+    padding-right: 1px * $ft-size !important;
+  }
+  .p-b-#{$ft-size} {
+    padding-bottom: 1px * $ft-size !important;
+  }
+  .p-l-#{$ft-size} {
+    padding-left: 1px * $ft-size !important;
+  }
+  $ft-size: $ft-size + 5;
+}
