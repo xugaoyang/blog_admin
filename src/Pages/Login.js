@@ -3,7 +3,7 @@ import 'antd/dist/antd.css'
 import { Card, Input, Button, Spin, message } from 'antd'
 import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { username } from '../store/actions';
+import { username, getUserSuccess } from '../store/actions';
 import '../assets/css/login.scss'
 import servicePath from '../config/apiUrl'
 import axios from 'axios'
@@ -191,9 +191,6 @@ function Login(props) {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  // const username = () => {
-  //   props.dispatch(username())
-  // }
   console.log(props)
   useEffect(() => {
     init()
@@ -228,9 +225,10 @@ function Login(props) {
       setIsLoading(false)
       if(res.data.data === '登陆成功') {
         localStorage.setItem('openId', res.data.openId)
-        // res.data.userName
+        console.log(res)
         // props.dispatch({ type: "USERNAME" })
-        props.username()
+        props.getUserSuccess(res.data.userName)
+        // props.username(res.data.userName)
         props.history.push('/index')
       } else {
         message.error('用户名密码错误')
@@ -279,7 +277,8 @@ function mapStateToProps(state) {
   };
 }
 const mapDispatchToProps = {
-  username
+  username,
+  getUserSuccess
 }
 
 // export default Login

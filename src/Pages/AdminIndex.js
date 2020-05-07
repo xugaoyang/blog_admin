@@ -11,12 +11,14 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     username: state.username
   };
 }
 
 function AdminIndex(props) {
+  console.log(props)
   const [collapsed, setCollapsed] = useState(false)
   const [logoUrl, setLogoUrl] = useState(require('../assets/img/logo_default.png'))
   const onCollapse = collapsed => {
@@ -32,6 +34,9 @@ function AdminIndex(props) {
     } else {
       props.history.push('/index/list')
     }
+  }
+  const logout = () => {
+    props.history.push('/login')
   }
   
   return (
@@ -55,7 +60,7 @@ function AdminIndex(props) {
         <Header className="display-flex-end" style={{ background: '#fff', padding: 0 }}>
           <div className="user-set">
             <span className="m-r-10">{props.username}</span>
-            <LogoutOutlined className="m-r-20 cursor-pointer" />
+            <LogoutOutlined className="m-r-20 cursor-pointer" onClick={logout} />
           </div>
         </Header>
         <Content style={{ margin: '0 16px' }}>
