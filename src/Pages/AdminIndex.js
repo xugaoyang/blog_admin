@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { ProfileOutlined, FileAddOutlined, LogoutOutlined } from '@ant-design/icons';
 import '../assets/css/adminIndex.scss'
-import AddArticle from './AddArticle'
+import ArticleDetail from './ArticleDetail'
 import ArticleList from './ArticleList'
 import {Route} from 'react-router-dom'
 import { connect } from 'react-redux';
@@ -22,10 +22,10 @@ function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false)
   const [logoUrl, setLogoUrl] = useState(require('../assets/img/logo_default.png'))
   const onCollapse = collapsed => {
-    console.log('折叠', collapsed);
+    console.log('折叠', collapsed)
     setCollapsed(collapsed)
     collapsed ? setLogoUrl(require('../assets/img/logo_mini.png')) : setLogoUrl(require('../assets/img/logo_default.png'))
-  };
+  }
 
   const handleClick = e => {
     console.log(e.item.props)
@@ -71,8 +71,9 @@ function AdminIndex(props) {
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
               <Route path="/index/" exact component={ArticleList} />
-              <Route path="/index/add/" exact component={AddArticle} />
-              <Route path="/index/add/:id" exact component={AddArticle} />
+              <Route path="/index/article/" exact component={ArticleDetail} />
+              <Route path="/index/article/:id" exact component={ArticleDetail} />
+              <Route path="/index/article/:id/:type" exact component={ArticleDetail} />
               <Route path="/index/list/" component={ArticleList} />
             </div>
           </div>

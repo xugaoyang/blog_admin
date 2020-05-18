@@ -9,8 +9,8 @@ import servicePath from '../config/apiUrl'
 const { Option } = Select;
 const { TextArea } = Input
 
-function AddArticle(props) {
-
+function ArticleDetail(props) {
+  const [articleType, setArticleType] = useState(props.match.params.type)
   const [articleId, setArticleId] = useState(0)  // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle, setArticleTitle] = useState('')   //文章标题
   const [articleContent , setArticleContent] = useState('')  //markdown的编辑内容
@@ -23,7 +23,7 @@ function AddArticle(props) {
   const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
   const [selectedType, setSelectedType] = useState('') //选择的文章类别
 
-  
+  console.log('当前文章类型', articleType)
   
   marked.setOptions({
     renderer: new marked.Renderer(),
@@ -167,10 +167,10 @@ function AddArticle(props) {
     <div>
       <Row gutter={5} jusitify='space-between' align="center" style={{marginBottom: 10}}>
         <Col span={10}>
-          <Input value={articleTitle} placeholder="博客标题" size="large" onChange={e=>{setArticleTitle(e.target.value)}} />
+          <Input value={articleTitle} placeholder="博客标题" size="large" onChange={e=>{setArticleTitle(e.target.value)}} disabled={articleType !== 'update'} />
         </Col>
         <Col span={4}>
-          <Select placeholder='输入文章类型' size="large" onChange={selectTypeHandler} style={{ width: '100%' }}>
+          <Select placeholder='输入文章类型' size="large" onChange={selectTypeHandler} style={{ width: '100%' }} disabled={articleType !== 'update'}>
             {
               typeInfo.map((item, index) => {
                 return (
@@ -187,13 +187,17 @@ function AddArticle(props) {
               onChange={(date, dateString) => setShowDate(dateString)}
               placeholder="发布日期"
               size="large"
+              disabled={articleType !== 'update'}
             />
         </Col>
         <Col span={6}>
+        {
+          articleType === 'update' &&
           <Row justify="end">
             <Button size="large">暂存文章</Button>&nbsp;
             <Button type="primary" size="large" onClick={saveArticle}>发布文章</Button>
           </Row>
+        }
         </Col>
       </Row>
       <Row gutter={5} style={{height: 100, marginBottom: 10}}>
@@ -204,6 +208,7 @@ function AddArticle(props) {
               value={introducemd}
               onChange={changeIntroduce}
               onPressEnter={changeIntroduce}
+              disabled={articleType !== 'update'}
           />
         </Col>
         <Col span={12}>
@@ -224,6 +229,7 @@ function AddArticle(props) {
             className="markdown-content"
             rows={20}
             placeholder="文章内容"
+            disabled={articleType !== 'update'}
           />
         </Col>
         <Col span={12} style={{height: '100%'}}>
@@ -238,4 +244,4 @@ function AddArticle(props) {
   )
 }
 
-export default AddArticle
+export default ArticleDetail

@@ -76,8 +76,9 @@ function ArticleList(props) {
       key: 'actions',
       render: (text, record, index) => (
         <div>
-          <Button onClick={() => updateArticle(record.id)} type="primary" style={{marginRight: '5px'}}>修改</Button>
-          <Button onClick={() => deleteArticle(record.id)}>删除</Button>
+          <Button onClick={() => readArticle(record.id)} style={{marginRight: '5px'}} size="small">查看</Button>
+          <Button onClick={() => updateArticle(record.id)} type="primary" style={{marginRight: '5px'}} size="small">修改</Button>
+          <Button onClick={() => deleteArticle(record.id)} type="danger" size="small">删除</Button>
         </div>
       )
     },
@@ -101,59 +102,13 @@ function ArticleList(props) {
   }
 
   const updateArticle = (id) => {
-    props.history.push(`/index/add/${id}`)
+    props.history.push(`/index/article/${id}/update`)
+  }
+  const readArticle = (id) => {
+    props.history.push(`/index/article/${id}`)
   }
   return (
     <div>
-      {/* <List
-        header={
-          <Row className="list-div">
-            <Col span={8}>
-              <h4>标题</h4>
-            </Col>
-            <Col span={3}>
-              <h4>类别</h4>
-            </Col>
-            <Col span={3}>
-              <h4>发布时间</h4>
-            </Col>
-            <Col span={3}>
-              <h4>浏览量</h4>
-            </Col>
-            <Col span={4}>
-              <h4>操作</h4>
-            </Col>
-          </Row>
-        }
-        bordered
-        dataSource={list}
-        renderItem={item => (
-          <List.Item>
-            <Row className="list-div">
-              <Col span={8}>
-                {item.title}
-              </Col>
-              <Col span={3}>
-                {item.typeName}
-              </Col>
-              <Col span={3}>
-                {item.addTime}
-              </Col>
-              <Col span={3}>
-                共{item.part_count}集
-              </Col>
-              <Col span={3}>
-                {item.view_count}
-              </Col>
-              <Col span={4}>
-                <Button type="primary">修改</Button>
-                <Button >删除</Button>
-              </Col>
-            </Row>
-          </List.Item>
-        )}
-      /> */}
-
       <Table dataSource={list} columns={columns} />
     </div>
 
