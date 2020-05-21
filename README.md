@@ -4,6 +4,7 @@
 
 
 #### 结构目录
+```
 |-- public
 |-- src
 |  |-- api
@@ -16,6 +17,7 @@
 |-- .env.dev
 |-- .env.production
 |-- package.json
+```
 #### 功能完善：
 - [x] 使用three.js美化登陆界面，效果参考iview首页粒子波纹效果
 - [x] 登出功能
