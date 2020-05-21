@@ -6,13 +6,13 @@
 #### 结构目录
 |-- public
 |-- src
-  |-- api
-  |-- assets
-  |-- config
-  |-- pages
-  |-- store
-  |-- utils
-  |-- index.js
+|  |-- api
+|  |-- assets
+|  |-- config
+|  |-- pages
+|  |-- store
+|  |-- utils
+|  |-- index.js
 |-- .env.dev
 |-- .env.production
 |-- package.json
