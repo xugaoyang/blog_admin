@@ -25,6 +25,7 @@ const article = {
   },
   // 文章列表
   articleList () {
+    console.log('1111111111111111')
     return axios.get(`${base.api}/admin/getArticleList`)
   },
   // 文章类型

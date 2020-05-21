@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { ProfileOutlined, FileAddOutlined, LogoutOutlined } from '@ant-design/icons';
 import '../assets/css/adminIndex.scss'
 import ArticleDetail from './ArticleDetail'
 import ArticleList from './ArticleList'
 import {Route} from 'react-router-dom'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import api from '../api/index'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -38,7 +39,10 @@ function AdminIndex(props) {
   const logout = () => {
     props.history.push('/login')
   }
-  
+  useEffect(() => {
+    
+    console.log('123456',api.article.articleList().then(res => console.log(res)))
+  }, [])
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>

@@ -11,12 +11,12 @@ import store from '../store/index'
  * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
 const toLogin = () => {
-  router.replace({
-      path: '/login',        
-      query: {
-          redirect: router.currentRoute.fullPath
-      }
-  })
+  // router.replace({
+  //     path: '/login',        
+  //     query: {
+  //         redirect: router.currentRoute.fullPath
+  //     }
+  // })
 }
 
 /** 
@@ -37,13 +37,13 @@ const errorHandle = (status, other) => {
       localStorage.removeItem('token')
       store.commit('loginSuccess', null)
       setTimeout(() => {
-          toLogin();
-      }, 1000);
-      break;
+        toLogin()
+      }, 1000)
+      break
     // 404请求不存在
     case 404:
       message('请求的资源不存在')
-      break;
+      break
     default:
       console.log(other)
   }
@@ -62,11 +62,13 @@ instance.interceptors.request.use(
   config => {
     // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
     // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
-    const token = store.state.token
-    token && (config.headers.Authorization = token)
+    console.log('config123123', config)
+    // const token = store.state.token
+    // token && (config.headers.Authorization = token)
     return config
   },
   error => {
+    console.log(Promise.error(error))
     return Promise.error(error)
   }
 )
@@ -77,7 +79,7 @@ instance.interceptors.response.use(
   // 服务器状态码不是200的情况    
   error => {
     const { response } = error
-    if (response.status) {
+    if (response && response.status) {
       errorHandle(response.status, response.data.message)
       return Promise.reject(response)
     }
