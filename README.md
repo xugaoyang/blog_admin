@@ -31,10 +31,11 @@
 - [x] bundle分析
 - [x] webpack配置（eject||react-app-rewired）
 - [ ] eslint + lint-staged + prettier
-- [ ] 封装axios
+- [x] 封装axios
 - [ ] 路由标签 react-router
 - [x] react-redux(添加redux-persist数据持续)
 - [ ] 登陆鉴权(JWT)
+- [ ] 抽取路由文件
 
 
 ##### bundle分析，先构建，再运行分析脚本

@@ -41,7 +41,7 @@ function AdminIndex(props) {
   }
   useEffect(() => {
     
-    console.log('123456',api.article.articleList().then(res => console.log(res)))
+
   }, [])
   return (
     <Layout style={{ minHeight: '100vh' }}>

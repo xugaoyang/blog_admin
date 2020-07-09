@@ -56,7 +56,7 @@ const instance = axios.create({ timeout: 1000 * 10 })
 
 // post请求头
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-
+instance.defaults.withCredentials = true
 // 请求拦截器
 instance.interceptors.request.use(
   config => {

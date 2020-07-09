@@ -2,52 +2,25 @@ import React, { useState, useEffect } from 'react'
 import {  Modal, message, Button, Table } from 'antd'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
+import api from '../api/index'
 
 const {confirm} = Modal
 
 function ArticleList(props) {
   const [list, setList] = useState([])
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: servicePath.getArticleList,
-      withCredentials: true,
-    }).then(res => {
-      if (res.data.data === '没有登陆') {
-        localStorage.removeItem('openId')
-        props.history.push('/login')
-      } else {
-        const articleList = res.data.list
-        articleList.map((item) => {
-          return Object.assign(item, {
-            key: item.id
-          })
-        })
-        console.log('文章列表',articleList)
-        setList(articleList)
-      }
-    }) 
+    getList()
   }, [props.history])
-  const getList = () => {
-    axios({
-      method: 'get',
-      url: servicePath.getArticleList,
-      withCredentials: true,
-    }).then(res => {
-      if (res.data.data === '没有登陆') {
-        localStorage.removeItem('openId')
-        props.history.push('/login')
-      } else {
-        const articleList = res.data.list
-        articleList.map((item) => {
-          return Object.assign(item, {
-            key: item.id
-          })
-        })
-        console.log('文章列表',articleList)
-        setList(articleList)
-      }
+  const getList = async () => {
+    const res = await api.article.articleList()
+    const articleList = res.data.list
+    articleList.map((item) => {
+      return Object.assign(item, {
+        key: item.id
+      })
     })
+    console.log('文章列表',articleList)
+    setList(articleList)
   }
   const columns = [
     {
