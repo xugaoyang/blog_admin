@@ -3,12 +3,14 @@ import 'antd/dist/antd.css'
 import { Card, Input, Button, Spin, message } from 'antd'
 import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { username, getUserSuccess } from '../store/actions';
+import { username, getUserSuccess, getToken } from '../store/actions';
 import '../assets/css/login.scss'
+import axios from '../utils/http';
 import api from '../api/index'
 import * as THREE from 'three'
 import Stats from '../assets/libs/three/stats.module.js';
 import bgImg from '../assets/img/bg.jpg'
+import Axios from 'axios';
 
 const sence = new THREE.Scene()
 var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
@@ -219,6 +221,8 @@ function Login(props) {
     if(res.data.data === '登陆成功') {
       localStorage.setItem('openId', res.data.openId)
       console.log(res)
+      props.getToken(`Bearer ${res.data.token}`)
+      axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`
       props.getUserSuccess(res.data.userName)
       props.history.push('/index')
     }
@@ -266,7 +270,8 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
   username,
-  getUserSuccess
+  getUserSuccess,
+  getToken,
 }
 
 // export default Login

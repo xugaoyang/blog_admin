@@ -6,7 +6,8 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 const initState = {
   username: '',
-  error: null
+  error: null,
+  token: '',
 }
 
 function reducer(state = initState, action) {
@@ -30,6 +31,11 @@ function reducer(state = initState, action) {
       return {
         ...state,
         error: action.payload.error
+      }
+    case 'GET_TOKEN':
+      return {
+        ...state,
+        token: action.payload.token
       }
     default:
     return state
