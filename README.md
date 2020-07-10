@@ -7,20 +7,20 @@
 ```
 |-- public
 |-- src
-|  |-- api
-|    |-- index.js // api导出出口
-|    |-- base.js  // 接口域名管理
-|    |-- ... // 其他模块api接口
-|  |-- assets
-|    |-- css
-|    |-- img
-|    |-- libs
-|  |-- config
-|  |-- pages
-|  |-- store // 状态管理库
-|  |-- utils // 工具库
-|    |-- http.js // axios 封装
-|  |-- index.js
+|   |-- api
+|       |-- index.js // api导出出口
+|       |-- base.js  // 接口域名管理
+|       |-- ... // 其他模块api接口
+|   |-- assets
+|       |-- css
+|       |-- img
+|       |-- libs
+|   |-- config
+|   |-- pages
+|   |-- store // 状态管理库
+|   |-- utils // 工具库
+|       |-- http.js // axios 封装
+|   |-- index.js
 |-- .env.dev
 |-- .env.production
 |-- package.json
