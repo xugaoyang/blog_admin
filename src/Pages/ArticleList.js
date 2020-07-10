@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import {  Modal, message, Button, Table } from 'antd'
-import axios from 'axios'
-import servicePath from '../config/apiUrl'
 import api from '../api/index'
 
 const {confirm} = Modal
@@ -62,11 +60,12 @@ function ArticleList(props) {
     confirm({
       title: '确定要删除这篇博客文章吗？',
       content: '如果你点击ok文章将会永远删除',
-      onOk() {
-        axios(servicePath.deleteArticle+id, {withCredentials: true}).then(res=> {
+      async onOk() {
+        const res = await api.article.deleteArticle({id})
+        if (res && res.status === 200) {
           message.success('文章删除成功')
           getList()
-        })
+        }
       },
       onCancel() {
         message.success('取消删除')

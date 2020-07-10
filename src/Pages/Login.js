@@ -5,8 +5,7 @@ import { UserOutlined, KeyOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { username, getUserSuccess } from '../store/actions';
 import '../assets/css/login.scss'
-import servicePath from '../config/apiUrl'
-import axios from 'axios'
+import api from '../api/index'
 import * as THREE from 'three'
 import Stats from '../assets/libs/three/stats.module.js';
 import bgImg from '../assets/img/bg.jpg'
@@ -196,7 +195,7 @@ function Login(props) {
     init()
     animate()
   }, [])
-  const checkLogin=() => {
+  const checkLogin= async () => {
     setIsLoading(true)
     
     if (!userName) {
@@ -212,28 +211,17 @@ function Login(props) {
       }, 1000)
       return false
     }
-    let dataProps = {
+    const res = await api.user.login({
       'userName': userName,
       'password': password
-    }
-    axios({
-      method: 'post',
-      url: servicePath.checkLogin,
-      data: dataProps,
-      withCredentials: true,
-    }).then((res)=>{
-      setIsLoading(false)
-      if(res.data.data === '登陆成功') {
-        localStorage.setItem('openId', res.data.openId)
-        console.log(res)
-        // props.dispatch({ type: "USERNAME" })
-        props.getUserSuccess(res.data.userName)
-        // props.username(res.data.userName)
-        props.history.push('/index')
-      } else {
-        message.error('用户名密码错误')
-      }
     })
+    setIsLoading(false)
+    if(res.data.data === '登陆成功') {
+      localStorage.setItem('openId', res.data.openId)
+      console.log(res)
+      props.getUserSuccess(res.data.userName)
+      props.history.push('/index')
+    }
     
   }
   return (

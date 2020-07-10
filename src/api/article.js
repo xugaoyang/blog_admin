@@ -13,7 +13,7 @@ const article = {
   },
   // 删除文章
   deleteArticle(params) {
-    return axios.delete(`${base.api}/admin/deleteArticle`, {data: params.id})
+    return axios.delete(`${base.api}/admin/deleteArticle/${params.id}`)
   },
   // 修改文章
   updateArticle(params) {
@@ -25,7 +25,6 @@ const article = {
   },
   // 文章列表
   articleList () {
-    console.log('1111111111111111')
     return axios.get(`${base.api}/admin/getArticleList`)
   },
   // 文章类型

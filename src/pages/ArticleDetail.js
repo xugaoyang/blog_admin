@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import marked from 'marked'
 import '../assets/css/addArticle.scss'
 import { Row, Col ,Input, Select ,Button ,DatePicker, message } from 'antd'
-import axios from 'axios'
-import servicePath from '../config/apiUrl'
-
+import api from '../api/index'
 
 const { Option } = Select;
 const { TextArea } = Input
@@ -48,18 +46,7 @@ function ArticleDetail(props) {
   }
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: servicePath.getTypeInfo,
-      withCredentials: true,
-    }).then((res) => {
-      if (res.data.data === '没有登陆') {
-        localStorage.removeItem('openId')
-        props.history.push('/login')
-      } else {
-        setTypeInfo(res.data.data)
-      }
-    })
+    getTypeInfo()
     let tmpId = props.match.params.id
     if(tmpId){
       setArticleId(tmpId)
@@ -71,22 +58,16 @@ function ArticleDetail(props) {
     console.log(value)
     setSelectedType(value)
   }
-  // eslint-disable-next-line
-  const getTypeInfo = () => {
-    axios({
-      method: 'get',
-      url: servicePath.getTypeInfo,
-      withCredentials: true,
-    }).then((res) => {
-      if (res.data.data === '没有登陆') {
-        localStorage.removeItem('openId')
-        props.history.push('/login')
-      } else {
-        setTypeInfo(res.data.data)
-      }
-    })
+  const getTypeInfo = async () => {
+    const res = await api.article.getArticleTypes()
+    if (res.data.data === '没有登陆') {
+      localStorage.removeItem('openId')
+      props.history.push('/login')
+    } else {
+      setTypeInfo(res.data.data)
+    }
   }
-  const saveArticle = () => {
+  const saveArticle = async () => {
     console.log('selectedType', selectedType)
     if (!selectedType) {
       message.error('必须选择文章类型')
@@ -116,40 +97,27 @@ function ArticleDetail(props) {
     if (articleId === 0) {
       console.log('articleId=:', articleId)
       dataProps.view_count = Math.ceil(Math.random()*100) + 1000
-      axios({
-        method: 'post',
-        url: servicePath.addArticle,
-        data: dataProps,
-        withCredentials: true,
-      }).then(res => {
+      const res = await api.article.addArticle(dataProps)
+      if (res.data.isSuccess) {
         setArticleId(res.data.insertId)
-        if (res.data.isSuccess) {
-          message.success('文章保存成功')
-        } else {
-          message.error('文章保存失败')
-        }
-      })
+        message.success('文章保存成功')
+      } else {
+        message.success('文章保存失败')
+      }
     } else {
       dataProps.id = articleId
-      axios({
-        method: 'post',
-        url: servicePath.updateArticle,
-        data: dataProps,
-        withCredentials: true,
-      }).then(res => {
-        if (res.data.isSuccess) {
-          message.success('文章保存成功')
-        } else {
-          message.error('保存失败')
-        }
-      })
+      const res = await api.article.updateArticle(dataProps)
+      if (res.data.isSuccess) {
+        message.success('文章保存成功')
+      } else {
+        message.success('文章保存失败')
+      }
     }
   }
 
-  const getArticleById=(id) => {
-    axios(servicePath.getArticleById + id, {
-      withCredentials: true,
-    }).then(res => {
+  const getArticleById = async (id) => {
+    const res = await api.article.articleDetail({id})
+    if (res && res.status === 200) {
       let articleInfo = res.data.data[0]
       setArticleTitle(articleInfo.title)
       setArticleContent(articleInfo.article_content)
@@ -160,7 +128,7 @@ function ArticleDetail(props) {
       setIntroducehtml(tmpInt)
       setShowDate(articleInfo.addTime)
       setSelectedType(articleInfo.typeId)
-    })
+    }
   }
 
   return (
