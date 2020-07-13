@@ -51,12 +51,11 @@ const errorHandle = (status, other) => {
 
 const instance = axios.create({ timeout: 1000 * 10 })
 
-// 设置接口域名
+// 设置接口域名，可能多方接入，暂时在api里面写入域名
 // instance.defaults.baseURL = process.env.REACT_APP_API_SERVER
 
 // post请求头
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-instance.defaults.withCredentials = true
+instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 // 请求拦截器
 instance.interceptors.request.use(
   config => {
@@ -65,6 +64,7 @@ instance.interceptors.request.use(
     console.log('config123123', config)
     // const token = store.state.token
     // token && (config.headers.Authorization = token)
+    // 登录之后才需要验证token,获取登陆的状态再判断
     return config
   },
   error => {

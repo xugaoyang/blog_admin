@@ -34,7 +34,7 @@
 - [x] 封装axios
 - [ ] 路由标签 react-router
 - [x] react-redux(添加redux-persist数据持续)
-- [ ] 登陆鉴权(JWT)
+- [x] 登陆鉴权(JWT)
 - [ ] 抽取路由文件
 
 

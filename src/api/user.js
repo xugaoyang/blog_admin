@@ -9,7 +9,7 @@ import qs from 'qs' // 根据需求是否导入qs模块
 const user = {
   // post提交
   login (params) {
-    return axios.post(`${base.api}/admin/checkLogin`, qs.stringify(params))
+    return axios.post(`${base.api}/admin/checkLogin`, params)
   }
 }
 

@@ -218,7 +218,8 @@ function Login(props) {
       'password': password
     })
     setIsLoading(false)
-    if(res.data.data === '登陆成功') {
+    console.log(res)
+    if(res.data.msg === '登陆成功') {
       localStorage.setItem('openId', res.data.openId)
       console.log(res)
       props.getToken(`Bearer ${res.data.token}`)

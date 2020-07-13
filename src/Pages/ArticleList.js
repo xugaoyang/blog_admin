@@ -11,14 +11,17 @@ function ArticleList(props) {
   }, [props.history])
   const getList = async () => {
     const res = await api.article.articleList()
-    const articleList = res.data.list
-    articleList.map((item) => {
-      return Object.assign(item, {
-        key: item.id
+    if (res && res.status === 200) {
+      const articleList = res.data.list
+      articleList.map((item) => {
+        return Object.assign(item, {
+          key: item.id
+        })
       })
-    })
-    console.log('文章列表',articleList)
-    setList(articleList)
+      console.log('文章列表',articleList)
+      setList(articleList)
+    }
+    
   }
   const columns = [
     {
